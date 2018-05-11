@@ -16,3 +16,5 @@ artify
 vendor/
 .idea/
 
+# Mac
+.DS_Store
