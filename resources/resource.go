@@ -1,8 +1,8 @@
 package resources
 
 import (
-	"fmt"
 	"github.com/artify/constant"
+	"github.com/artify/utils"
 	"github.com/jinzhu/gorm"
 )
 
@@ -12,7 +12,7 @@ type Resource struct {
 }
 
 func (r *Resource) Close() {
-	fmt.Println("[INFO]: Closing all connection ...")
+	utils.LogInfo("Closing all connection ...")
 	if r.Config.IsEnablePostgreSQL {
 		r.PostgreSQL.Close()
 	}
@@ -24,10 +24,10 @@ func Init(config constant.Config) (*Resource, error) {
 
 	// PostgreSQL
 	if config.IsEnablePostgreSQL {
-		fmt.Print("[INFO] Initializing PostgreSQL connection")
+		utils.LogInfo("Initializing PostgreSQL connection")
 		pg, err := initPostgreSQL(config.IsEnablePostgreSQLLogger)
 		if err != nil {
-			fmt.Print("[ERROR] Failed PostgreSQL connection ...", err)
+			utils.LogError("Failed PostgreSQL connection ...", err)
 			return nil, err
 		}
 		r.PostgreSQL = pg
@@ -37,10 +37,11 @@ func Init(config constant.Config) (*Resource, error) {
 }
 
 func initPostgreSQL(enableLogger bool) (*gorm.DB, error) {
-	dbSQL, err := gorm.Open("postgres", "postgres://"+constant.PostgresUser+
-		":"+constant.PostgresPassword+"@"+constant.PostgresHost+
-		":"+constant.PostgresPort+"/"+constant.PostgresDB+
-		"?sslmode=disable")
+	dbSQL, err := gorm.Open("postgres",
+		"postgres://"+constant.PostgresUser+
+			":"+constant.PostgresPassword+"@"+constant.PostgresHost+
+			":"+constant.PostgresPort+"/"+constant.PostgresDB+
+			"?sslmode=disable")
 	if err != nil {
 		return dbSQL, err
 	}
