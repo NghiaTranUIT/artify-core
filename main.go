@@ -4,6 +4,7 @@ import (
 	"fmt"
 	"github.com/artify/constant"
 	"github.com/artify/service"
+	"net/http"
 )
 
 func main() {
@@ -18,5 +19,10 @@ func main() {
 
 	// App
 	app := service.GetEngine(config)
-	app.Run(constant.AppHost + ":" + constant.AppPort)
+	s := &http.Server{
+		Addr: constant.AppHost + ":" + constant.AppPort,
+	}
+
+	// Start
+	app.Logger.Fatal(app.StartServer(s))
 }

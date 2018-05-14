@@ -3,31 +3,18 @@ package service
 import (
 	"github.com/artify/constant"
 	"github.com/artify/model"
-	"github.com/gin-gonic/contrib/gzip"
-	"github.com/gin-gonic/gin"
+	"github.com/labstack/echo"
+	"github.com/labstack/echo/middleware"
 	"net/http"
 )
 
-func Start() {
+func GetEngine(config constant.Config) *echo.Echo {
 
-	r := gin.Default()
-	r.Run()
-}
+	app := echo.New()
 
-func initializeEngine() *gin.Engine {
-	if constant.AppMode == "debug" {
-		gin.SetMode(gin.DebugMode)
-		return gin.Default()
-	}
-
-	// Release
-	gin.SetMode(gin.ReleaseMode)
-	return gin.New()
-}
-func GetEngine(config constant.Config) *gin.Engine {
-
-	app := initializeEngine()
-	app.Use(gzip.Gzip(gzip.DefaultCompression))
+	// Middleware
+	app.Use(middleware.Logger())
+	app.Use(middleware.Gzip())
 
 	// Apply Routes
 
@@ -38,11 +25,11 @@ func GetEngine(config constant.Config) *gin.Engine {
 	return app
 }
 
-func home(c *gin.Context) {
+func home(e echo.Context) error {
 	res := model.Response{
 		Code:    http.StatusOK,
 		Data:    map[string]string{"Hello": "It's Artify Core"},
 		Message: "Success",
 	}
-	c.JSON(http.StatusOK, res)
+	return e.JSON(http.StatusOK, res)
 }
