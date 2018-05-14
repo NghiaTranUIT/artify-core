@@ -1,9 +1,10 @@
 package main
 
 import (
-	"fmt"
 	"github.com/artify/constant"
+	"github.com/artify/resources"
 	"github.com/artify/service"
+	"github.com/artify/utils"
 	"net/http"
 )
 
@@ -11,11 +12,20 @@ func main() {
 
 	// Default configuration
 	config := constant.Config{
-		PostgreSQL:       true,
-		PostgreSQLLogger: true,
+		IsEnablePostgreSQL:       true,
+		IsEnablePostgreSQLLogger: true,
 	}
 
-	fmt.Printf("Hello, world.\n")
+	// Resource
+	r, err := resources.Init(config)
+	if err != nil {
+		utils.LogError("Initialed Resource ...", err)
+		return
+	}
+	defer r.Close()
+
+	// Hello
+	utils.LogInfo("Hello, world.")
 
 	// App
 	app := service.GetEngine(config)
