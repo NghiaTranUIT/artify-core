@@ -7,4 +7,10 @@ type Photo struct {
 	Name     string
 	ImageUrl *string `gorm:"not null"`
 	AuthorID uint
+	Width    uint `gorm:"not null"`
+	Height   uint `gorm:"not null"`
 }
+
+//func GetPhotoByPhotoID(photoID int) (*Photo, error) {
+//
+//}

@@ -2,11 +2,9 @@ package main
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
-	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/NghiaTranUIT/artify-core/resources"
 	"github.com/NghiaTranUIT/artify-core/service"
 	"github.com/NghiaTranUIT/artify-core/utils"
-	"net/http"
 )
 
 func main() {
@@ -26,17 +24,11 @@ func main() {
 	defer r.Close()
 
 	// Migration
-	r.PostgreSQL.AutoMigrate(&model.Author{}, &model.Photo{})
-
-	// Hello
-	utils.LogInfo("Hello, world.")
+	r.MigrateDatabase()
 
 	// App
-	app := service.GetEngine(config)
-	s := &http.Server{
-		Addr: constant.AppHost + ":" + constant.AppPort,
+	app := service.Service{
+		R: r,
 	}
-
-	// Start
-	app.Logger.Fatal(app.StartServer(s))
+	app.Start()
 }
