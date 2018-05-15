@@ -1,0 +1,24 @@
+# Golang CircleCI 2.0 configuration file
+#
+# Check https://circleci.com/docs/2.0/language-go/ for more details
+version: 2
+jobs:
+  build:
+    docker:
+      - image: circleci/golang:1.9
+      # - image: circleci/postgres:9.4
+    working_directory: /go/src/github.com/NghiaTranUIT/artify-core
+    steps:
+      - checkout
+      - run: go get -v
+      - run: go build -v
+
+workflows:
+  version: 2
+  build_test_and_deploy:
+    jobs:
+      - build:
+          filters:
+            branches:
+              only:
+                - /.*/

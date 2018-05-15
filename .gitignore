@@ -5,6 +5,7 @@
 *.so
 *.dylib
 artify
+artify-core
 
 # Test binary, build with `go test -c`
 *.test

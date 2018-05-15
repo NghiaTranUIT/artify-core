@@ -1,10 +1,10 @@
 package main
 
 import (
-	"github.com/artify/constant"
-	"github.com/artify/resources"
-	"github.com/artify/service"
-	"github.com/artify/utils"
+	"github.com/NghiaTranUIT/artify-core/constant"
+	"github.com/NghiaTranUIT/artify-core/resources"
+	"github.com/NghiaTranUIT/artify-core/service"
+	"github.com/NghiaTranUIT/artify-core/utils"
 	"net/http"
 )
 
