@@ -4,6 +4,7 @@ import (
 	"github.com/NghiaTranUIT/artify-core/constant"
 	"github.com/NghiaTranUIT/artify-core/utils"
 	"github.com/jinzhu/gorm"
+	_ "github.com/lib/pq"
 )
 
 type Resource struct {
@@ -30,6 +31,7 @@ func Init(config constant.Config) (*Resource, error) {
 			utils.LogError("Failed PostgreSQL connection ...", err)
 			return nil, err
 		}
+		utils.LogInfo("Connected PostgreSQL successfully !!!")
 		r.PostgreSQL = pg
 	}
 
