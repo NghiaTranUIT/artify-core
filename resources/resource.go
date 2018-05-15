@@ -1,8 +1,8 @@
 package resources
 
 import (
-	"github.com/artify/constant"
-	"github.com/artify/utils"
+	"github.com/NghiaTranUIT/artify-core/constant"
+	"github.com/NghiaTranUIT/artify-core/utils"
 	"github.com/jinzhu/gorm"
 )
 

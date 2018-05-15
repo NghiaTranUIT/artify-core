@@ -1,8 +1,8 @@
 package service
 
 import (
-	"github.com/artify/constant"
-	"github.com/artify/model"
+	"github.com/NghiaTranUIT/artify-core/constant"
+	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"net/http"
