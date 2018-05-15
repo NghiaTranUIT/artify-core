@@ -2,6 +2,7 @@ package main
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
+	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/NghiaTranUIT/artify-core/resources"
 	"github.com/NghiaTranUIT/artify-core/service"
 	"github.com/NghiaTranUIT/artify-core/utils"
@@ -23,6 +24,9 @@ func main() {
 		return
 	}
 	defer r.Close()
+
+	// Migration
+	r.PostgreSQL.AutoMigrate(&model.Author{}, &model.Photo{})
 
 	// Hello
 	utils.LogInfo("Hello, world.")

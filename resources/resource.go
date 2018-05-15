@@ -4,7 +4,7 @@ import (
 	"github.com/NghiaTranUIT/artify-core/constant"
 	"github.com/NghiaTranUIT/artify-core/utils"
 	"github.com/jinzhu/gorm"
-	_ "github.com/lib/pq"
+	_ "github.com/jinzhu/gorm/dialects/postgres"
 )
 
 type Resource struct {
