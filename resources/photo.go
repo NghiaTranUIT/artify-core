@@ -2,21 +2,14 @@ package resources
 
 import (
 	"github.com/NghiaTranUIT/artify-core/model"
-	"github.com/NghiaTranUIT/artify-core/utils"
-	"github.com/labstack/echo"
-	"github.com/pkg/errors"
-	"net/http"
 )
 
-func (r *Resource) GetFeatureToday(c echo.Context) error {
+func (r *Resource) GetLatestFeaturePhoto() (*model.Photo, error) {
 	lastPhoto := model.Photo{}
-	r.PostgreSQL.Last(&lastPhoto)
+	err := r.PostgreSQL.Last(&lastPhoto).Error
 
 	if lastPhoto.ID == 0 {
-		response := utils.ResponseError(errors.New("There is no photo"))
-		return c.JSON(http.StatusBadRequest, response)
+		return nil, err
 	}
-
-	response := utils.ResponseSuccess(lastPhoto)
-	return c.JSON(http.StatusOK, response)
+	return &lastPhoto, nil
 }

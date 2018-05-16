@@ -2,33 +2,35 @@ package service
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
-	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/NghiaTranUIT/artify-core/resources"
+	"github.com/NghiaTranUIT/artify-core/service/router"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"net/http"
 )
 
 type Service struct {
-	R    *resources.Resource
-	echo *echo.Echo
+	echo   *echo.Echo
+	router *router.Router
+}
+
+func New(r *resources.Resource) *Service {
+	service := Service{
+		echo:   echo.New(),
+		router: &router.Router{R: r},
+	}
+	return &service
 }
 
 func (s *Service) Start() {
-
-	app := echo.New()
-	s.echo = app
+	echo := s.echo
 
 	// Middleware
-	app.Use(middleware.Logger())
-	app.Use(middleware.Gzip())
+	echo.Use(middleware.Logger())
+	echo.Use(middleware.Gzip())
 
-	// Apply Routes
-	s.applyPhotoRoute()
-	s.applyAuthorRoute()
-
-	// Default route
-	app.GET("/", home)
+	// Routes
+	s.router.ApplyRoutes(echo)
 
 	// Config
 	config := &http.Server{
@@ -36,24 +38,5 @@ func (s *Service) Start() {
 	}
 
 	// Start
-	app.Logger.Fatal(app.StartServer(config))
-}
-
-func home(c echo.Context) error {
-	res := model.Response{
-		Code:    http.StatusOK,
-		Data:    map[string]string{"Hello": "It's Artify Core"},
-		Message: "Success",
-	}
-	return c.JSON(http.StatusOK, res)
-}
-
-func (s *Service) applyPhotoRoute() {
-	g := s.echo.Group("/feature")
-	g.GET("/today", s.R.GetFeatureToday)
-}
-
-func (s *Service) applyAuthorRoute() {
-	g := s.echo.Group("/author")
-	g.GET("/create_sample", s.R.CreateSampleAuthorAndPhoto)
+	echo.Logger.Fatal(echo.StartServer(config))
 }

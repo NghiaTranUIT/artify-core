@@ -27,8 +27,6 @@ func main() {
 	r.MigrateDatabase()
 
 	// App
-	app := service.Service{
-		R: r,
-	}
+	app := service.New(r)
 	app.Start()
 }

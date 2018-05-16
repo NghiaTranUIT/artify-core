@@ -2,12 +2,9 @@ package resources
 
 import (
 	"github.com/NghiaTranUIT/artify-core/model"
-	"github.com/NghiaTranUIT/artify-core/utils"
-	"github.com/labstack/echo"
-	"net/http"
 )
 
-func (r *Resource) CreateSampleAuthorAndPhoto(c echo.Context) error {
+func (r *Resource) CreateNewSampleAuthorAndPhoto() (*model.Author, error) {
 	photo := model.Photo{
 		Name:     "The Starry Night",
 		Height:   3959,
@@ -22,7 +19,9 @@ func (r *Resource) CreateSampleAuthorAndPhoto(c echo.Context) error {
 		Photos:      []model.Photo{photo},
 		Wikipedia:   "en.wikipedia.org/wiki/Vincent_van_Gogh",
 	}
-	r.PostgreSQL.Create(&author)
-	response := utils.ResponseSuccess(author)
-	return c.JSON(http.StatusOK, response)
+	err := r.PostgreSQL.Create(&author).Error
+	if err != nil {
+		return nil, err
+	}
+	return &author, nil
 }
