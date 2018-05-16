@@ -8,10 +8,10 @@ import (
 
 func (r *Router) ApplyPhotoRoute(e *echo.Echo) {
 	g := e.Group("/feature")
-	g.GET("/today", r.GetFeatureToday)
+	g.GET("/today", r.getFeatureToday)
 }
 
-func (r *Router) GetFeatureToday(c echo.Context) error {
+func (r *Router) getFeatureToday(c echo.Context) error {
 
 	// Latest from DB
 	photo, err := r.R.GetLatestFeaturePhoto()

@@ -8,10 +8,10 @@ import (
 
 func (r *Router) ApplyGeneratorRoute(echo *echo.Echo) {
 	g := echo.Group("/generate")
-	g.GET("/author_photo", r.GenerateAuthorPhoto)
+	g.GET("/author_photo", r.generateAuthorPhoto)
 }
 
-func (r *Router) GenerateAuthorPhoto(c echo.Context) error {
+func (r *Router) generateAuthorPhoto(c echo.Context) error {
 
 	// Latest from DB
 	photo, err := r.R.GetLatestFeaturePhoto()
