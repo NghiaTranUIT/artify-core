@@ -2,34 +2,41 @@ package service
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
-	"github.com/NghiaTranUIT/artify-core/model"
+	"github.com/NghiaTranUIT/artify-core/resources"
+	"github.com/NghiaTranUIT/artify-core/service/router"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
 	"net/http"
 )
 
-func GetEngine(config constant.Config) *echo.Echo {
-
-	app := echo.New()
-
-	// Middleware
-	app.Use(middleware.Logger())
-	app.Use(middleware.Gzip())
-
-	// Apply Routes
-
-	// Default route
-	app.GET("/", home)
-
-	// Return
-	return app
+type Service struct {
+	echo   *echo.Echo
+	router *router.Router
 }
 
-func home(e echo.Context) error {
-	res := model.Response{
-		Code:    http.StatusOK,
-		Data:    map[string]string{"Hello": "It's Artify Core"},
-		Message: "Success",
+func New(r *resources.Resource) *Service {
+	service := Service{
+		echo:   echo.New(),
+		router: &router.Router{R: r},
 	}
-	return e.JSON(http.StatusOK, res)
+	return &service
+}
+
+func (s *Service) Start() {
+	echo := s.echo
+
+	// Middleware
+	echo.Use(middleware.Logger())
+	echo.Use(middleware.Gzip())
+
+	// Routes
+	s.router.ApplyRoutes(echo)
+
+	// Config
+	config := &http.Server{
+		Addr: constant.AppHost + ":" + constant.AppPort,
+	}
+
+	// Start
+	echo.Logger.Fatal(echo.StartServer(config))
 }

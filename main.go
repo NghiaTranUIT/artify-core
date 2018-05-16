@@ -5,7 +5,6 @@ import (
 	"github.com/NghiaTranUIT/artify-core/resources"
 	"github.com/NghiaTranUIT/artify-core/service"
 	"github.com/NghiaTranUIT/artify-core/utils"
-	"net/http"
 )
 
 func main() {
@@ -24,15 +23,10 @@ func main() {
 	}
 	defer r.Close()
 
-	// Hello
-	utils.LogInfo("Hello, world.")
+	// Migration
+	r.MigrateDatabase()
 
 	// App
-	app := service.GetEngine(config)
-	s := &http.Server{
-		Addr: constant.AppHost + ":" + constant.AppPort,
-	}
-
-	// Start
-	app.Logger.Fatal(app.StartServer(s))
+	app := service.New(r)
+	app.Start()
 }
