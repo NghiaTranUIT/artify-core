@@ -46,9 +46,12 @@ func (r *Resource) MigrateDatabase() {
 func initPostgreSQL(enableLogger bool) (*gorm.DB, error) {
 	dbSQL, err := gorm.Open("postgres",
 		"postgres://"+constant.PostgresUser+
-			":"+constant.PostgresPassword+"@"+constant.PostgresHost+
+			":"+constant.PostgresPassword+"@"+constant.PostgresDockerName+
 			":"+constant.PostgresPort+"/"+constant.PostgresDB+
 			"?sslmode=disable")
+
+	//"postgres://postgres:Password1@db/artify_dev?sslmode=disable"
+
 	if err != nil {
 		return dbSQL, err
 	}

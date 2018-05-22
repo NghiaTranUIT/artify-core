@@ -1,0 +1,22 @@
+version: '3'
+services:
+  db:
+    image: postgres
+    restart: always
+    environment:
+      POSTGRES_DB: artify_dev
+      POSTGRES_USER: nghiatran
+      POSTGRES_PASSWORD: Password1
+    ports:
+      - "5432:5432"
+  app:
+    build: .
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
+    volumes:
+      - .:/go/src/github.com/NghiaTranUIT/artify-core
+    ports:
+      - "7300:7300"
+    depends_on:
+      - db
+    links:
+      - db

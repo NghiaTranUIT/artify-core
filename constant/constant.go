@@ -6,9 +6,10 @@ const (
 	AppMode = "debug"
 
 	// PostgreSQL
-	PostgresHost     = ""
-	PostgresPort     = ""
-	PostgresUser     = ""
-	PostgresDB       = ""
-	PostgresPassword = ""
+	PostgresHost       = ""
+	PostgresDockerName = ""
+	PostgresPort       = ""
+	PostgresUser       = ""
+	PostgresDB         = ""
+	PostgresPassword   = ""
 )
