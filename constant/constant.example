@@ -4,6 +4,7 @@ const (
 	AppMode = "debug"
 
 	// PostgreSQL
+	PostgresHost       = ""
 	PostgresDockerName = ""
 	PostgresPort     = ""
 	PostgresUser     = ""
