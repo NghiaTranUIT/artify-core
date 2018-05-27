@@ -11,10 +11,6 @@ func (r *Router) ApplyHomeRoute(e *echo.Echo) {
 }
 
 func (r *Router) getDefaultHome(c echo.Context) error {
-	res := model.Response{
-		Code:    http.StatusOK,
-		Data:    map[string]string{"Hello": "It's Artify Core"},
-		Message: "Success",
-	}
-	return c.JSON(http.StatusOK, res)
+	payload := map[string]string{"Hello": "It's Artify Core"}
+	return c.JSON(http.StatusOK, model.NewSuccessReponse(payload))
 }
