@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/NghiaTranUIT/artify-core/utils"
+	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/labstack/echo"
 	"net/http"
 )
@@ -14,15 +14,12 @@ func (r *Router) ApplyGeneratorRoute(echo *echo.Echo) {
 func (r *Router) generateAuthorPhoto(c echo.Context) error {
 
 	// Latest from DB
-	photo, err := r.R.GetLatestFeaturePhoto()
+	author, err := r.R.CreateNewSampleAuthorAndPhoto()
 
-	// Not found
-	if photo == nil {
-		response := utils.ResponseError(err)
-		return c.JSON(http.StatusBadRequest, response)
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, model.NewErrorResponse(err))
 	}
 
 	// Success
-	response := utils.ResponseSuccess(photo)
-	return c.JSON(http.StatusOK, response)
+	return c.JSON(http.StatusOK, model.NewSuccessReponse(author))
 }

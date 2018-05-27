@@ -1,7 +1,7 @@
 package router
 
 import (
-	"github.com/NghiaTranUIT/artify-core/utils"
+	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/labstack/echo"
 	"net/http"
 )
@@ -18,11 +18,9 @@ func (r *Router) getFeatureToday(c echo.Context) error {
 
 	// Not found
 	if photo == nil {
-		response := utils.ResponseError(err)
-		return c.JSON(http.StatusOK, response)
+		return c.JSON(http.StatusOK, model.NewErrorResponse(err))
 	}
 
 	// Success
-	response := utils.ResponseSuccess(photo)
-	return c.JSON(http.StatusOK, response)
+	return c.JSON(http.StatusOK, model.NewSuccessReponse(photo))
 }
