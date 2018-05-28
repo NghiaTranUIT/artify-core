@@ -6,4 +6,8 @@ WORKDIR /go/src/github.com/NghiaTranUIT/artify-core
 
 ADD . /go/src/github.com/NghiaTranUIT/artify-core
 
-RUN go get -v
+RUN go get -u github.com/golang/dep/cmd/dep &&\
+    go get github.com/pilu/fresh 
+
+RUN dep ensure
+

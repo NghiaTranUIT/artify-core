@@ -12,7 +12,7 @@ services:
       - "5432:5432"
   app:
     build: .
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "fresh", "-c", "runner.conf", "main.go"]
     volumes:
       - .:/go/src/github.com/NghiaTranUIT/artify-core
     ports:
