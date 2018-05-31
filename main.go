@@ -11,7 +11,7 @@ func main() {
 
 	// Default configuration
 	config := constant.Config{
-		IsEnablePostgreSQL:       true,
+		IsEnablePostgreSQL: true,
 	}
 
 	// Resource

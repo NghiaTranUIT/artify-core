@@ -1,7 +1,7 @@
 create_table("photos", func(t) {
 	t.Column("id", "uuid", {"primary": true})
-	t.Column("name", "text", {})
-	t.Column("image_url", "text", {})
+	t.Column("name", "string", {})
+	t.Column("image_url", "string", {})
 	t.Column("author_id", "uuid", {})
 	t.Column("width", "integer", {})
 	t.Column("height", "integer", {})
