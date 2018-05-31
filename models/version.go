@@ -16,6 +16,7 @@ type Version struct {
 	BuildVersion string    `json:"build_version" db:"build_version"`
 	BuildNumber  uint      `json:"build_number" db:"build_number"`
 	Url          string    `json:"url" db:"url"`
+	Notes        string    `json:"notes" db:"notes"`
 }
 
 // String is not required by pop and may be deleted

@@ -1,0 +1,2 @@
+remove_column("versions", "notes")
+remove_column("versions", "url")

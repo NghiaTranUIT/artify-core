@@ -1,1 +1,2 @@
 add_column("versions", "url", "string", {})
+add_column("versions", "notes", "text", {})

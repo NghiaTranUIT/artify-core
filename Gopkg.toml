@@ -41,3 +41,7 @@
   name = "github.com/gobuffalo/pop"
   version = "4.5.9"
 
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/mcuadros/go-version"
