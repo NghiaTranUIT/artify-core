@@ -1,9 +1,10 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/labstack/echo"
-	"net/http"
 )
 
 func (r *Router) ApplyPhotoRoute(e *echo.Echo) {
