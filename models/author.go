@@ -7,7 +7,6 @@ import (
 	"github.com/gobuffalo/pop"
 	"github.com/gobuffalo/uuid"
 	"github.com/gobuffalo/validate"
-	"github.com/gobuffalo/validate/validators"
 )
 
 type Author struct {
@@ -35,18 +34,6 @@ type Authors []Author
 func (a Authors) String() string {
 	ja, _ := json.Marshal(a)
 	return string(ja)
-}
-
-// Validate gets run every time you call a "pop.Validate*" (pop.ValidateAndSave, pop.ValidateAndCreate, pop.ValidateAndUpdate) method.
-// This method is not required and may be deleted.
-func (a *Author) Validate(tx *pop.Connection) (*validate.Errors, error) {
-	return validate.Validate(
-		&validators.StringIsPresent{Field: a.Name, Name: "Name"},
-		&validators.StringIsPresent{Field: a.Born, Name: "Born"},
-		&validators.StringIsPresent{Field: a.Died, Name: "Died"},
-		&validators.StringIsPresent{Field: a.Nationality, Name: "Nationality"},
-		&validators.StringIsPresent{Field: a.Wikipedia, Name: "Wikipedia"},
-	), nil
 }
 
 // ValidateCreate gets run every time you call "pop.ValidateAndCreate" method.

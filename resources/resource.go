@@ -2,7 +2,7 @@ package resources
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
-	"github.com/NghiaTranUIT/artify-core/model"
+	"github.com/NghiaTranUIT/artify-core/models"
 	"github.com/NghiaTranUIT/artify-core/utils"
 	"github.com/jinzhu/gorm"
 	_ "github.com/jinzhu/gorm/dialects/postgres"
@@ -40,7 +40,7 @@ func Init(config constant.Config) (*Resource, error) {
 }
 
 func (r *Resource) MigrateDatabase() {
-	r.PostgreSQL.AutoMigrate(&model.Author{}, &model.Photo{})
+	r.PostgreSQL.AutoMigrate(&models.Author{}, &models.Photo{})
 }
 
 func initPostgreSQL(enableLogger bool) (*gorm.DB, error) {
