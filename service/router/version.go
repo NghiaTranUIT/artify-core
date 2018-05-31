@@ -3,6 +3,7 @@ package router
 import (
 	"github.com/NghiaTranUIT/artify-core/models"
 	"github.com/labstack/echo"
+	"github.com/pkg/errors"
 	"net/http"
 )
 
@@ -34,7 +35,7 @@ func (r *Router) getUpdateVersion(c echo.Context) error {
 
 	// Not found
 	if version == nil {
-		return c.JSON(http.StatusNoContent, nil)
+		return c.JSON(http.StatusNoContent, models.NewErrorResponse(errors.New("There is no latest build")))
 	}
 
 	// Success

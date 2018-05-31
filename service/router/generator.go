@@ -10,6 +10,7 @@ import (
 func (r *Router) ApplyGeneratorRoute(echo *echo.Echo) {
 	g := echo.Group("/generate")
 	g.GET("/author_photo", r.generateAuthorPhoto)
+	g.GET("/version", r.generateSampleVersion)
 }
 
 func (r *Router) generateAuthorPhoto(c echo.Context) error {
@@ -23,4 +24,16 @@ func (r *Router) generateAuthorPhoto(c echo.Context) error {
 
 	// Success
 	return c.JSON(http.StatusOK, models.NewSuccessReponse(author))
+}
+
+func (r *Router) generateSampleVersion(c echo.Context) error {
+	// Generate
+	version, err := r.R.GenerateSampleVersion()
+
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.NewErrorResponse(err))
+	}
+
+	// Success
+	return c.JSON(http.StatusOK, models.NewSuccessReponse(version))
 }
