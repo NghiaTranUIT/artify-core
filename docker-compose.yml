@@ -5,19 +5,28 @@ services:
     volumes:
           - /var/lib/postgresql/data
     environment:
-      POSTGRES_DB: artify_dev
+      POSTGRES_DB: artify-core_development
       POSTGRES_USER: nghiatran
       POSTGRES_PASSWORD: Password1
     ports:
       - "5432:5432"
   app:
     build: .
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "fresh", "-c", "runner.conf", "main.go"]
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
     volumes:
       - .:/go/src/github.com/NghiaTranUIT/artify-core
     ports:
       - "7300:7300"
     depends_on:
-      - db
+      - migration
     links:
+      - db
+  migration:
+    build: .
+    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "soda", "migrate", "up"]
+    volumes:
+      - .:/go/src/github.com/NghiaTranUIT/artify-core
+    links:
+      - db
+    depends_on:
       - db

@@ -2,8 +2,8 @@ development:
   dialect: postgres
   database: artify-core_development
   user: nghiatran
-  password:
-  host: 127.0.0.1
+  password: Password1
+  host: db
   pool: 5
 
 test:
