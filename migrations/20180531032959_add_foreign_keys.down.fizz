@@ -1,0 +1,1 @@
+drop_foreign_key("photos", "photos_authors_id_fk", {"if_exists": true})

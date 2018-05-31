@@ -12,7 +12,6 @@ func main() {
 	// Default configuration
 	config := constant.Config{
 		IsEnablePostgreSQL:       true,
-		IsEnablePostgreSQLLogger: true,
 	}
 
 	// Resource
@@ -22,9 +21,6 @@ func main() {
 		return
 	}
 	defer r.Close()
-
-	// Migration
-	r.MigrateDatabase()
 
 	// App
 	app := service.New(r)

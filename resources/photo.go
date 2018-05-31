@@ -1,14 +1,14 @@
 package resources
 
 import (
-	"github.com/NghiaTranUIT/artify-core/model"
+	"github.com/NghiaTranUIT/artify-core/models"
 )
 
-func (r *Resource) GetLatestFeaturePhoto() (*model.Photo, error) {
-	lastPhoto := model.Photo{}
-	err := r.PostgreSQL.Last(&lastPhoto).Related(&lastPhoto.Author).Error
+func (r *Resource) GetLatestFeaturePhoto() (*models.Photo, error) {
+	lastPhoto := models.Photo{}
+	err := r.PostgreSQL.Eager("Author").First(&lastPhoto)
 
-	if lastPhoto.ID == 0 {
+	if err != nil {
 		return nil, err
 	}
 

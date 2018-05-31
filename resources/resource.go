@@ -2,15 +2,13 @@ package resources
 
 import (
 	"github.com/NghiaTranUIT/artify-core/constant"
-	"github.com/NghiaTranUIT/artify-core/model"
 	"github.com/NghiaTranUIT/artify-core/utils"
-	"github.com/jinzhu/gorm"
-	_ "github.com/jinzhu/gorm/dialects/postgres"
+	"github.com/gobuffalo/pop"
 )
 
 type Resource struct {
 	Config     constant.Config
-	PostgreSQL *gorm.DB
+	PostgreSQL *pop.Connection
 }
 
 func (r *Resource) Close() {
@@ -27,7 +25,7 @@ func Init(config constant.Config) (*Resource, error) {
 	// PostgreSQL
 	if config.IsEnablePostgreSQL {
 		utils.LogInfo("Initializing PostgreSQL connection")
-		pg, err := initPostgreSQL(config.IsEnablePostgreSQLLogger)
+		pg, err := initPostgreSQL()
 		if err != nil {
 			utils.LogError("Failed PostgreSQL connection ...", err)
 			return nil, err
@@ -39,24 +37,10 @@ func Init(config constant.Config) (*Resource, error) {
 	return &r, nil
 }
 
-func (r *Resource) MigrateDatabase() {
-	r.PostgreSQL.AutoMigrate(&model.Author{}, &model.Photo{})
-}
-
-func initPostgreSQL(enableLogger bool) (*gorm.DB, error) {
-	dbSQL, err := gorm.Open("postgres",
-		"postgres://"+constant.PostgresUser+
-			":"+constant.PostgresPassword+"@"+constant.PostgresDockerName+
-			":"+constant.PostgresPort+"/"+constant.PostgresDB+
-			"?sslmode=disable")
-
-	//"postgres://postgres:Password1@db/artify_dev?sslmode=disable"
-
+func initPostgreSQL() (*pop.Connection, error) {
+	dbSQL, err := pop.Connect("development")
 	if err != nil {
 		return dbSQL, err
 	}
-	dbSQL.DB()
-	dbSQL.DB().SetMaxIdleConns(10)
-	dbSQL.DB().SetMaxOpenConns(150)
 	return dbSQL, err
 }

@@ -1,12 +1,13 @@
 package service
 
 import (
+	"net/http"
+
 	"github.com/NghiaTranUIT/artify-core/constant"
 	"github.com/NghiaTranUIT/artify-core/resources"
 	"github.com/NghiaTranUIT/artify-core/service/router"
 	"github.com/labstack/echo"
 	"github.com/labstack/echo/middleware"
-	"net/http"
 )
 
 type Service struct {
