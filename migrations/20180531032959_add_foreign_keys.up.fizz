@@ -1,0 +1,3 @@
+add_foreign_key("photos", "author_id", {"authors": ["id"]}, {
+    "on_delete": "RESTRICT"
+})

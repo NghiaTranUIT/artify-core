@@ -1,0 +1,8 @@
+create_table("authors", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("name", "text", {})
+	t.Column("born", "text", {})
+	t.Column("died", "text", {})
+	t.Column("nationality", "text", {})
+	t.Column("wikipedia", "text", {})
+})
