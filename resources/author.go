@@ -19,7 +19,7 @@ func (r *Resource) CreateNewSampleAuthorAndPhoto() (*models.Author, error) {
 		Photos:      []models.Photo{photo},
 		Wikipedia:   "en.wikipedia.org/wiki/Vincent_van_Gogh",
 	}
-	err := r.PostgreSQL.Create(&author).Error
+	err := r.PostgreSQL.Eager().Create(&author)
 	if err != nil {
 		return nil, err
 	}

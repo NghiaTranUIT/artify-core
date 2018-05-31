@@ -23,9 +23,6 @@ func main() {
 	}
 	defer r.Close()
 
-	// Migration
-	r.MigrateDatabase()
-
 	// App
 	app := service.New(r)
 	app.Start()

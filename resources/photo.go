@@ -6,7 +6,7 @@ import (
 
 func (r *Resource) GetLatestFeaturePhoto() (*models.Photo, error) {
 	lastPhoto := models.Photo{}
-	err := r.PostgreSQL.Last(&lastPhoto).Related(&lastPhoto.Author).Error
+	err := r.PostgreSQL.Eager("Author").First(&lastPhoto)
 
 	if err != nil {
 		return nil, err

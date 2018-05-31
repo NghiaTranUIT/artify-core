@@ -69,21 +69,6 @@
   version = "v2.0.0"
 
 [[projects]]
-  name = "github.com/jinzhu/gorm"
-  packages = [
-    ".",
-    "dialects/postgres"
-  ]
-  revision = "6ed508ec6a4ecb3531899a69cbc746ccf65a4166"
-  version = "v1.9.1"
-
-[[projects]]
-  branch = "master"
-  name = "github.com/jinzhu/inflection"
-  packages = ["."]
-  revision = "04140366298a54a039076d798123ffa108fff46c"
-
-[[projects]]
   branch = "master"
   name = "github.com/jmoiron/sqlx"
   packages = [
@@ -123,7 +108,6 @@
   name = "github.com/lib/pq"
   packages = [
     ".",
-    "hstore",
     "oid"
   ]
   revision = "90697d60dd844d5ef6ff15135d0203f65d2f53b8"
@@ -227,6 +211,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "dfe5a8079360ec3308272b7a914cfe2b46b7cdccfb200120b4e3403a8e91fb13"
+  inputs-digest = "66f13eb707717586786bbaec09a3ddb428cd3d85cefb10384d7047fb48ef4557"
   solver-name = "gps-cdcl"
   solver-version = 1
