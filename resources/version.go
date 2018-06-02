@@ -32,17 +32,3 @@ func (r *Resource) GetUpdateAppVersion(buildVersion string) (*models.Version, er
 	// New version
 	return latestVersion, nil
 }
-
-func (r *Resource) GenerateSampleVersion() (*models.Version, error) {
-	version := models.Version{
-		BuildVersion: "1.0.0",
-		BuildNumber:  1000,
-		Url:          "https://www.dropbox.com/s/cxwtqvrgblr4t0b/Artify_1.0.0.zip?dl=1",
-		Notes:        "First version Artify",
-	}
-	err := r.PostgreSQL.Create(&version)
-	if err != nil {
-		return nil, err
-	}
-	return &version, nil
-}

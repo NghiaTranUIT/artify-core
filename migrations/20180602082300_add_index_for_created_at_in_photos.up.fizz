@@ -1,0 +1,1 @@
+add_index("photos", "created_at", {})

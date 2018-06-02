@@ -1,0 +1,1 @@
+drop_foreign_key("dashboards", "dashboards_photos_id_fk", {"if_exists": true})

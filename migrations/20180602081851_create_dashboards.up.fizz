@@ -1,0 +1,5 @@
+create_table("dashboards", func(t) {
+	t.Column("id", "uuid", {"primary": true})
+	t.Column("type", "string", {})
+	t.Column("photo_id", "uuid", {})
+})
