@@ -1,0 +1,1 @@
+drop_index("photos", "photos_created_at_idx")

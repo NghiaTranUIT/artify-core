@@ -1,0 +1,3 @@
+add_foreign_key("dashboards", "photo_id", {"photos": ["id"]}, {
+    "on_delete": "RESTRICT"
+})

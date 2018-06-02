@@ -1,10 +1,11 @@
 package router
 
 import (
+	"net/http"
+
 	"github.com/NghiaTranUIT/artify-core/models"
 	"github.com/labstack/echo"
 	"github.com/pkg/errors"
-	"net/http"
 )
 
 func (r *Router) ApplyVersionRoute(e *echo.Echo) {
