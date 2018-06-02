@@ -14,6 +14,7 @@ type Dashboard struct {
 	CreatedAt time.Time `json:"created_at" db:"created_at"`
 	UpdatedAt time.Time `json:"updated_at" db:"updated_at"`
 	Type      string    `json:"type" db:"type"`
+	Photo     Photo     `belongs_to:"photo"`
 	PhotoID   uuid.UUID `json:"photo_id" db:"photo_id"`
 }
 

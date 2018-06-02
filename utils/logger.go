@@ -17,5 +17,5 @@ func LogError(a ...interface{}) {
 
 func LogWarning(a ...interface{}) {
 	warning := fmt.Sprint(a)
-	fmt.Println("[WARNING]", time.Now(), warning)
+	fmt.Println("[WARNING] 🔥", time.Now(), warning)
 }
