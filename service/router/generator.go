@@ -11,6 +11,7 @@ func (r *Router) ApplyGeneratorRoute(echo *echo.Echo) {
 	g := echo.Group("/generate")
 	g.GET("/author_photo", r.generateAuthorPhoto)
 	g.GET("/version", r.generateSampleVersion)
+	g.GET("/feature", r.generateFeaturePhoto)
 }
 
 func (r *Router) generateAuthorPhoto(c echo.Context) error {
@@ -36,4 +37,13 @@ func (r *Router) generateSampleVersion(c echo.Context) error {
 
 	// Success
 	return c.JSON(http.StatusOK, models.NewSuccessReponse(version))
+}
+
+func (r *Router) generateFeaturePhoto(c echo.Context) error {
+	feature, err := r.R.GenerateSampleFeaturePhoto()
+	if err != nil {
+		return c.JSON(http.StatusBadRequest, models.NewErrorResponse(err))
+	}
+	// Success
+	return c.JSON(http.StatusOK, models.NewSuccessReponse(feature))
 }
