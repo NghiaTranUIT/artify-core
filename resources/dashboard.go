@@ -5,6 +5,14 @@ import (
 	"time"
 )
 
+func (r *Resource) GetLatestFeatureOnDashboard() (*models.Dashboard, error) {
+	feature := models.Dashboard{}
+	err := r.PostgreSQL.
+		Where("type = ?", "feature").
+		Last(&feature)
+	return &feature, err
+}
+
 func (r *Resource) GetFeatureOnDashboard() (*models.Dashboard, error) {
 	feature := models.Dashboard{}
 
