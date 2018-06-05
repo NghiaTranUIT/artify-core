@@ -1,0 +1,23 @@
+builds:
+  binary: artify-core
+  goos:
+    - linux
+    - darwin
+  goarch:
+    - amd64
+checksum:
+  name_template: '{{ .ProjectName }}_checksums.txt'
+archive:
+  format: tar.gz
+  replacements:
+    amd64: 64-bit
+    darwin: macOS
+    linux: Tux
+changelog:
+  sort: asc
+  filters:
+    exclude:
+    - '^docs:'
+    - '^test:'
+    - Merge pull request
+    - Merge branch
