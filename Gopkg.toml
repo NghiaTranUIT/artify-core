@@ -45,3 +45,7 @@
 [[constraint]]
   branch = "master"
   name = "github.com/mcuadros/go-version"
+
+[[constraint]]
+  branch = "master"
+  name = "github.com/gocarina/gocsv"
