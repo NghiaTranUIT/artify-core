@@ -1,0 +1,6 @@
+remove_column("photos", "info")
+remove_column("photos", "date")
+remove_column("photos", "style")
+remove_column("photos", "location")
+remove_column("photos", "dimensions")
+remove_column("photos", "media")

@@ -1,0 +1,6 @@
+add_column("photos", "info", "text", {})
+add_column("photos", "date", "string", {})
+add_column("photos", "style", "string", {})
+add_column("photos", "location", "string", {})
+add_column("photos", "dimensions", "string", {})
+add_column("photos", "media", "string", {})

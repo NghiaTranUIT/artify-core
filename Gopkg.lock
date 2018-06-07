@@ -70,6 +70,12 @@
 
 [[projects]]
   branch = "master"
+  name = "github.com/gocarina/gocsv"
+  packages = ["."]
+  revision = "a5c9099e2484f1551abb9433885e158610a25f4b"
+
+[[projects]]
+  branch = "master"
   name = "github.com/jmoiron/sqlx"
   packages = [
     ".",
@@ -217,6 +223,6 @@
 [solve-meta]
   analyzer-name = "dep"
   analyzer-version = 1
-  inputs-digest = "918cb2a3bb9829cfae1b7a6239a645b863f2deaf158e584116c513ebae25bac1"
+  inputs-digest = "0fb127103b756ca864c0d12b323e1d569c4bf3b9743aade0cde462edb59342d0"
   solver-name = "gps-cdcl"
   solver-version = 1
