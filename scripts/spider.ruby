@@ -5,6 +5,7 @@ require 'json'
 require 'nokogiri'
 require 'open-uri'
 require 'watir'
+require "awesome_print"
 
 # This will hold the options we parse
 options = {}
@@ -26,6 +27,9 @@ end.parse!
 if options[:url]
   url = options[:url]
 
+  # Data
+  payload = {}
+
   puts url
 
   browser = Watir::Browser.new :chrome
@@ -37,30 +41,28 @@ if options[:url]
   doc = Nokogiri::HTML(browser.html)
 
   name = trim(doc.css('.wiki-layout-artist-info article h3').first.content)
-  puts name
+  payload['name'] = name
 
   doc.css('.wiki-layout-artist-info article ul li').each do |link|
     link.css('s').each do |tag|
-      key = trim(tag.content).delete(':')
+      key = trim(tag.content).delete(':').downcase
       value = link.css('span')[0]
-      puts key
 
       if !value.nil?
-        puts trim(value.content)
+        payload[key] = trim(value.content)
       end
 
       if key == 'Dimensions'
-        puts trim(link.content)
+        payload[key] = trim(link.content)
       end
 
     end
-    # puts link.content
   end
 
-  puts "### Click Btn"
   container = doc.css('div.view-thumnails-sizes-item').first
-  container.css('div.thumbnail-item a.hidden-blank.ng-binding').each do |link|
-    puts link.content + " = " + link['href'].partition('!')[0]
-  end
+  linkNode = container.css('div.thumbnail-item a.hidden-blank.ng-binding').last
+  payload['url'] = linkNode['href'].partition('!')[0]
+  payload['size'] = linkNode.content
 
+  ap payload
 end
