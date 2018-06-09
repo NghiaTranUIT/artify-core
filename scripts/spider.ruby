@@ -26,7 +26,8 @@ end.parse!
 # Now we can use the options hash however we like.
 if options[:url]
   url = options[:url]
-  puts url
+
+  puts "Fetching ... " + url
 
   #
   browser = Watir::Browser.new :chrome
@@ -70,11 +71,17 @@ if options[:url]
   payload['url'] = linkNode['href'].partition('!').first
   payload['size'] = linkNode.content
 
-  ap payload
+  # Get size
+  size = payload['size']
+  if !size.nil?
+    components = size.split("x")
+    payload['width'] = components.first.to_i
+    payload['height'] = components.last.to_i
+  end
 
   # Link
   link = article.css('h5 span a').first['href']
-  ap link
+  ap "Go to ... " + link
 
   # #############################
   # Move to author page
@@ -99,13 +106,36 @@ if options[:url]
           author_payload[key] = trim(value.content)
         end
 
-        if key == 'Dimensions'
+        if key == "Dimensions"
           author_payload[key] = trim(link.content)
         end
       end
     end
-
-    #
-    ap author_payload
   end
+
+  # Full payload
+  body = {
+    "photo" => payload,
+    "author" => author_payload
+  }
+  ap body
+
+  endpoint = "http://127.0.0.1:7300/spider/wikiart"
+  puts "Posting to " + endpoint
+
+  # Request
+  encoded_url = URI.encode(endpoint)
+  uri = URI.parse(encoded_url)
+  https = Net::HTTP.new(uri.host, uri.port)
+  request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
+  request.body = body.to_json
+  response = https.request(request)
+  ap response
+
+  ## Succss
+  if response.code.to_i == 200
+    value = JSON.parse(response.body)
+    puts value
+  end
+
 end
