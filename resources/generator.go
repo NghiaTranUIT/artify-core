@@ -38,7 +38,7 @@ func (r *Resource) CreateNewSampleAuthorAndPhoto() (*models.Photo, error) {
 		if err != nil {
 			author = models.Author{
 				Name:        csvPhoto.AuthorName,
-				Wikipedia:   csvPhoto.Width,
+				Wikipedia:   csvPhoto.Wikipedia,
 				Born:        csvPhoto.Born,
 				Died:        csvPhoto.Died,
 				Nationality: csvPhoto.Nationality,

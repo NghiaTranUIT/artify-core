@@ -1,0 +1,2 @@
+remove_column("photos", "original_source")
+remove_column("authors", "original_source")

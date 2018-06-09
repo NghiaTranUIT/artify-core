@@ -15,4 +15,5 @@ func (r *Router) ApplyRoutes(e *echo.Echo) {
 	r.ApplyAuthorRoute(e)
 	r.ApplyGeneratorRoute(e)
 	r.ApplyVersionRoute(e)
+	r.ApplySpiderRoute(e)
 }
