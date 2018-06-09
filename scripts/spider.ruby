@@ -26,27 +26,27 @@ end.parse!
 # Now we can use the options hash however we like.
 if options[:url]
   url = options[:url]
+  puts url
+
+  #
+  browser = Watir::Browser.new :chrome
+  browser.goto url
+  browser.link(text: 'View all sizes').click
 
   # Data
   payload = {}
 
-  puts url
-
-  browser = Watir::Browser.new :chrome
-
-  browser.goto 'https://www.wikiart.org/en/caspar-david-friedrich/the-wanderer-above-the-sea-of-fog'
-  browser.link(text: 'View all sizes').click
-
   # Fetch and parse HTML document
   doc = Nokogiri::HTML(browser.html)
 
-  name = trim(doc.css('.wiki-layout-artist-info article h3').first.content)
+  article = doc.css('.wiki-layout-artist-info article')
+  name = trim(article.css('h3').first.content)
   payload['name'] = name
 
-  doc.css('.wiki-layout-artist-info article ul li').each do |link|
+  article.css('ul li').each do |link|
     link.css('s').each do |tag|
       key = trim(tag.content).delete(':').downcase
-      value = link.css('span')[0]
+      value = link.css('span').first
 
       if !value.nil?
         payload[key] = trim(value.content)
@@ -61,8 +61,45 @@ if options[:url]
 
   container = doc.css('div.view-thumnails-sizes-item').first
   linkNode = container.css('div.thumbnail-item a.hidden-blank.ng-binding').last
-  payload['url'] = linkNode['href'].partition('!')[0]
+  payload['url'] = linkNode['href'].partition('!').first
   payload['size'] = linkNode.content
 
   ap payload
+
+  # Link
+  link = article.css('h5 span a').first['href']
+  ap link
+
+  # #############################
+  # Move to author page
+  if !link.nil?
+
+    browser.goto('https://www.wikiart.org' + link)
+    doc = Nokogiri::HTML(browser.html)
+    author_payload = {}
+    name_author = trim(doc.css('.wiki-layout-artist-info article h3').first.content)
+    author_payload['name'] = name_author
+
+    article = doc.css('.wiki-layout-artist-info article')
+    name = trim(article.css('h3').first.content)
+    author_payload['name'] = name
+
+    article.css('ul li').each do |link|
+      link.css('s').each do |tag|
+        key = trim(tag.content).delete(':').downcase
+        value = link.css('span').first
+
+        if !value.nil?
+          author_payload[key] = trim(value.content)
+        end
+
+        if key == 'Dimensions'
+          author_payload[key] = trim(link.content)
+        end
+      end
+    end
+
+    #
+    ap author_payload
+  end
 end
