@@ -1,0 +1,2 @@
+add_column("photos", "original_source", "string", {"default": ""})
+add_column("authors", "original_source", "string", {"default": ""})
