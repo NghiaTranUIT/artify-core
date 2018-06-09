@@ -11,7 +11,7 @@ require "awesome_print"
 options = {}
 
 def trim(text)
-  return text.strip
+  return text.strip.split.join(" ")
 end
 
 OptionParser.new do |parser|
@@ -43,6 +43,7 @@ if options[:url]
   name = trim(article.css('h3').first.content)
   payload['name'] = name
 
+  # Photo info
   article.css('ul li').each do |link|
     link.css('s').each do |tag|
       key = trim(tag.content).delete(':').downcase
@@ -57,6 +58,11 @@ if options[:url]
       end
 
     end
+  end
+
+  info_tab = doc.css('.wiki-layout-artist-info-wrapper .wiki-layout-artist-info-tab p').first
+  if !info_tab.nil?
+    payload['info'] = trim info_tab.content
   end
 
   container = doc.css('div.view-thumnails-sizes-item').first
