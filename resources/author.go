@@ -13,11 +13,12 @@ func (r *Resource) CreateAuthorByWikiart(param models.AuthorParam) (*models.Auth
 	// Create new author
 	if err != nil {
 		newAuthor := models.Author{
-			Name:        param.Name,
-			Born:        param.Born,
-			Died:        param.Died,
-			Nationality: param.Nationality,
-			Wikipedia:   param.Wikipedia,
+			Name:           param.Name,
+			Born:           param.Born,
+			Died:           param.Died,
+			Nationality:    param.Nationality,
+			Wikipedia:      param.Wikipedia,
+			OriginalSource: param.OriginalSource,
 		}
 		err = r.PostgreSQL.Create(&newAuthor)
 		if err != nil {

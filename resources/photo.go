@@ -34,17 +34,18 @@ func (r *Resource) CreatePhotoByWikiart(param models.PhotoParam, author models.A
 	// Create new photo
 	if err != nil {
 		newPhoto := models.Photo{
-			Name:       param.Name,
-			ImageUrl:   param.Url,
-			Location:   param.Location,
-			Dimensions: "",
-			Media:      param.Media,
-			Style:      param.Style,
-			Date:       param.Date,
-			Info:       param.Info,
-			Width:      uint(param.Width),
-			Height:     uint(param.Height),
-			AuthorID:   author.ID,
+			Name:           param.Name,
+			ImageUrl:       param.Url,
+			Location:       param.Location,
+			Dimensions:     "",
+			Media:          param.Media,
+			Style:          param.Style,
+			Date:           param.Date,
+			Info:           param.Info,
+			Width:          uint(param.Width),
+			Height:         uint(param.Height),
+			AuthorID:       author.ID,
+			OriginalSource: param.OriginalSource,
 		}
 		err = r.PostgreSQL.Eager("Author").Create(&newPhoto)
 		if err != nil {

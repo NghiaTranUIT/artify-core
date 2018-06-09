@@ -10,15 +10,16 @@ import (
 )
 
 type Author struct {
-	ID          uuid.UUID `json:"id" db:"id"`
-	CreatedAt   time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt   time.Time `json:"updated_at" db:"updated_at"`
-	Name        string    `json:"name" db:"name"`
-	Born        string    `json:"born" db:"born"`
-	Died        string    `json:"died" db:"died"`
-	Nationality string    `json:"nationality" db:"nationality"`
-	Wikipedia   string    `json:"wikipedia" db:"wikipedia"`
-	Photos      Photos    `json:"photos" has_many:"books"`
+	ID             uuid.UUID `json:"id" db:"id"`
+	CreatedAt      time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at" db:"updated_at"`
+	Name           string    `json:"name" db:"name"`
+	Born           string    `json:"born" db:"born"`
+	Died           string    `json:"died" db:"died"`
+	Nationality    string    `json:"nationality" db:"nationality"`
+	Wikipedia      string    `json:"wikipedia" db:"wikipedia"`
+	Photos         Photos    `json:"photos" has_many:"books"`
+	OriginalSource string    `json:"original_source" db:"original_source"`
 }
 
 // String is not required by pop and may be deleted

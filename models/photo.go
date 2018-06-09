@@ -10,21 +10,22 @@ import (
 )
 
 type Photo struct {
-	ID         uuid.UUID `json:"id" db:"id"`
-	CreatedAt  time.Time `json:"created_at" db:"created_at"`
-	UpdatedAt  time.Time `json:"updated_at" db:"updated_at"`
-	Name       string    `json:"name" db:"name"`
-	ImageUrl   string    `json:"image_url" db:"image_url"`
-	Author     Author    `json:"author" belongs_to:"author"`
-	AuthorID   uuid.UUID `json:"-" db:"author_id"`
-	Width      uint      `json:"width" db:"width"`
-	Height     uint      `json:"height" db:"height"`
-	Info       string    `json:"info" db:"info"`
-	Date       string    `json:"date" db:"date"`
-	Style      string    `json:"style" db:"style"`
-	Location   string    `json:"location" db:"location"`
-	Dimensions string    `json:"dimensions" db:"dimensions"`
-	Media      string    `json:"media" db:"media"`
+	ID             uuid.UUID `json:"id" db:"id"`
+	CreatedAt      time.Time `json:"created_at" db:"created_at"`
+	UpdatedAt      time.Time `json:"updated_at" db:"updated_at"`
+	Name           string    `json:"name" db:"name"`
+	ImageUrl       string    `json:"image_url" db:"image_url"`
+	Author         Author    `json:"author" belongs_to:"author"`
+	AuthorID       uuid.UUID `json:"-" db:"author_id"`
+	Width          uint      `json:"width" db:"width"`
+	Height         uint      `json:"height" db:"height"`
+	Info           string    `json:"info" db:"info"`
+	Date           string    `json:"date" db:"date"`
+	Style          string    `json:"style" db:"style"`
+	Location       string    `json:"location" db:"location"`
+	Dimensions     string    `json:"dimensions" db:"dimensions"`
+	Media          string    `json:"media" db:"media"`
+	OriginalSource string    `json:"original_source" db:"original_source"`
 }
 
 // String is not required by pop and may be deleted

@@ -36,6 +36,7 @@ if options[:url]
 
   # Data
   payload = {}
+  payload['original_source'] = url
 
   # Fetch and parse HTML document
   doc = Nokogiri::HTML(browser.html)
@@ -86,10 +87,12 @@ if options[:url]
   # #############################
   # Move to author page
   if !link.nil?
-
-    browser.goto('https://www.wikiart.org' + link)
+    author_url = 'https://www.wikiart.org' + link
+    browser.goto(author_url)
     doc = Nokogiri::HTML(browser.html)
     author_payload = {}
+    author_payload['original_source'] = author_url
+
     name_author = trim(doc.css('.wiki-layout-artist-info article h3').first.content)
     author_payload['name'] = name_author
 
