@@ -22,3 +22,6 @@ vendor/
 
 # Config
 constant/constant.go
+
+# Dist
+dist
