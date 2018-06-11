@@ -27,5 +27,6 @@ if options[:name]
     url = row["url"]
     script = 'ruby spider.ruby --url ' + url
     system script
+    break
   end
 end
