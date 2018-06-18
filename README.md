@@ -86,6 +86,10 @@ POSTGRES_PASSWORD: your_password
 
 > It's kind of a heart 🍣 in your chest.
 
+* **What is the current progress?**
+
+> Here is [Open Ticket](https://github.com/NghiaTranUIT/artify-core/issues?q=is%3Aopen+is%3Aissue) and [Close Ticket](https://github.com/NghiaTranUIT/artify-core/issues?q=is%3Aissue+is%3Aclosed)
+
 * **Where can I get the Artify macOS app?**
 > Here [Landing Page](https://artify.launchaco.com) and [Github](https://github.com/NghiaTranUIT/artify-macos)
 
