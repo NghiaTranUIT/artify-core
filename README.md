@@ -47,6 +47,7 @@ A Golang Backend core of [Artify](https://github.com/NghiaTranUIT/artify-macos),
 * [Soda Database Migration](https://github.com/gobuffalo/pop/tree/master/fizz)
 * [Go Releaser](https://github.com/goreleaser/goreleaser)
 * [CircleCI](https://circleci.com)
+* [Cloudflare](https://www.cloudflare.com)
 
 ## Development
 Fortunately, Artify Core is composed by Docker and Docker-Composed, so we don't need to install PostgreSQL manually.
@@ -90,6 +91,9 @@ POSTGRES_PASSWORD: your_password
 
 > Here is [Open Ticket](https://github.com/NghiaTranUIT/artify-core/issues?q=is%3Aopen+is%3Aissue) and [Close Ticket](https://github.com/NghiaTranUIT/artify-core/issues?q=is%3Aissue+is%3Aclosed)
 
+* **Do you intend to publish Artify APIs (Production) to community?**
+> For a second phrase, I definitely publish my Artify to community. If there are anyone, who is interested to this project, could be reuse effortlessly : >
+
 * **Where can I get the Artify macOS app?**
 > Here [Landing Page](https://artify.launchaco.com) and [Github](https://github.com/NghiaTranUIT/artify-macos)
 
@@ -109,7 +113,7 @@ POSTGRES_PASSWORD: your_password
 
 > The conjunction of [Nokogiri](http://www.nokogiri.org) and [Watir](http://watir.com) are perfect for this scenario. Indeed, I'm a lazy man, I don't want to collect data like a manual labor 😅.
 
-* **Why do you use Docker? Is it over-engineering?***
+* **Why do you use Docker? Is it over-engineering?**
 > Docker and Docker-Compose minimize the redundant and boring steps when you setups the project runs smoothly at the first time.
 
 > It often gets me nut when trying to install PostgreSQL driver manually and do all necessary stuff.
@@ -125,9 +129,16 @@ POSTGRES_PASSWORD: your_password
 
 > The [Pull Request](https://github.com/NghiaTranUIT/artify-core/issues/23) if you're interested 👨‍💻.
 
+* **What is the production Endpoint?**
+> You can access to Production Endpoint from [https://megaton.xyz](https://megaton.xyz)
+
+> This production endpoint is protected by Cloudflare (SSL and Authenticated Origin Pull) 👨‍💻.
+
+> More detail at [#43](https://github.com/NghiaTranUIT/artify-core/issues/43).
+
 * **Can I become a contributor?**
 
-> Defintely, I appreciate your effort to become a contributor. Clone the project and setup your workspace. Happy coding guys 🚢
+> Definitely, I appreciate your effort to become a contributor. Clone the project and setup your workspace. Happy coding guys 🚢
 
 * **Do you have personal blog?**
 > Yes, I often write blog at [My lab](www.nghiatran.me) 👨‍🍳
