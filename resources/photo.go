@@ -57,3 +57,12 @@ func (r *Resource) CreatePhotoByWikiart(param models.PhotoParam, author models.A
 	// Skip
 	return &photo, nil
 }
+
+func (r *Resource) GetRandomPhoto() (*models.Photo, error) {
+	photo := models.Photo{}
+	err := r.PostgreSQL.Eager("Author").Order("random()").Limit(1).First(&photo)
+	if err != nil {
+		return nil, err
+	}
+	return &photo, nil
+}

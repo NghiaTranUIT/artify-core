@@ -10,6 +10,7 @@ import (
 func (r *Router) ApplyPhotoRoute(e *echo.Echo) {
 	g := e.Group("/feature")
 	g.GET("/today", r.getFeatureToday)
+	g.GET("/random", r.getRandomPhoto)
 }
 
 func (r *Router) getFeatureToday(c echo.Context) error {
@@ -23,5 +24,14 @@ func (r *Router) getFeatureToday(c echo.Context) error {
 	}
 
 	// Success
+	return c.JSON(http.StatusOK, models.NewSuccessReponse(photo))
+}
+
+func (r *Router) getRandomPhoto(c echo.Context) error {
+	photo, err := r.R.GetRandomPhoto()
+
+	if err != nil {
+		return c.JSON(http.StatusOK, models.NewErrorResponse(err))
+	}
 	return c.JSON(http.StatusOK, models.NewSuccessReponse(photo))
 }
