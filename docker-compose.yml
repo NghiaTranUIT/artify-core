@@ -16,7 +16,7 @@ services:
     volumes:
       - .:/go/src/github.com/NghiaTranUIT/artify-core
     ports:
-      - "7300:7300"
+      - "7300:5432"
     depends_on:
       - migration
     links:
