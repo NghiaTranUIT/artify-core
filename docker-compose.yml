@@ -9,10 +9,10 @@ services:
       POSTGRES_USER: nghiatran
       POSTGRES_PASSWORD: Password1
     ports:
-      - "5432:5432"
+      - "7001:7001"
   app:
     build: .
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "go", "run", "main.go"]
+    command: ["./scripts/wait-for-it.sh", "db:7001", "--", "go", "run", "main.go"]
     volumes:
       - .:/go/src/github.com/NghiaTranUIT/artify-core
     ports:
@@ -23,7 +23,7 @@ services:
       - db
   migration:
     build: .
-    command: ["./scripts/wait-for-it.sh", "db:5432", "--", "soda", "migrate", "up"]
+    command: ["./scripts/wait-for-it.sh", "db:7001", "--", "soda", "migrate", "up"]
     volumes:
       - .:/go/src/github.com/NghiaTranUIT/artify-core
     links:
