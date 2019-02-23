@@ -123,22 +123,28 @@ if options[:url]
   }
   ap body
 
-  endpoint = "http://127.0.0.1:7300/spider/wikiart"
-  puts "Posting to " + endpoint
+  endpoint = "https://api.proxyman.app/spider/wikiart"
+  ap "Posting to #{endpoint}"
 
   # Request
   encoded_url = URI.encode(endpoint)
   uri = URI.parse(encoded_url)
-  https = Net::HTTP.new(uri.host, uri.port)
+  https = Net::HTTP.new(uri.host, 443)
+  https.use_ssl = true
   request = Net::HTTP::Post.new(uri.path, 'Content-Type' => 'application/json')
   request.body = body.to_json
   response = https.request(request)
+
   ap response
+  ap "code #{response.code}"
 
   ## Succss
   if response.code.to_i == 200
+    ap "Success !!!"
     value = JSON.parse(response.body)
     puts value
+  else
+    ap "ERROR!!! at " + url
   end
 
 end
