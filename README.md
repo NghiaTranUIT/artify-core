@@ -70,6 +70,21 @@ POSTGRES_PASSWORD: your_password
 ### Artify macOS app
 <a href='https://github.com/NghiaTranUIT/artify-macos/releases/download/0.5.1/Artify.zip'>Download Artify 0.5.1</a>
 
+### Scripts
+```
+# Install all essential gems
+$ bundle install
+
+# Install chrome driver
+$ brew tap homebrew/cask && brew cask install chromedriver
+
+# Add urls to the CSV file
+$ vim ./scripts/initial_data.csv
+
+# Start
+$ ruby ./scripts/csv_loader.rb --name ./scripts/initial_data.csv
+```
+
 ## FAQ
 
 * **Why Golang? Why isn't it Ruby or NodeJS?**
