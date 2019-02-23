@@ -25,7 +25,7 @@ if options[:name]
   csv = CSV.parse(csv_text, :headers => true)
   csv.each do |row|
     url = row["url"]
-    script = 'ruby spider.ruby --url ' + url
+    script = 'ruby spider.rb --url ' + url
     system script
   end
 end
